@@ -63,7 +63,7 @@ ul{
 .section-title
 {
   flex: 0 0 100%;
-  width: 100%;
+  max-width: 100%;
   margin-bottom: 60px;
   
 }
@@ -73,7 +73,7 @@ ul{
   font-weight: 700;
   position: relative;
 }
-.section-title h2 ::before{
+.section-title h2::before{
   content: '';
   height: 4px;
   width: 50px;
@@ -82,7 +82,7 @@ ul{
   top: 100%;
   left: 0;
 }
-.section-title h2 ::after{
+.section-title h2::after{
   content: '';
   height: 4px;
   width: 25px;
@@ -341,4 +341,58 @@ h3.my-profession
   border-radius: 5px;
   height: 400px;
   
+}
+/* About */
+.about .about-content
+{
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+.about .about-content .about-text
+{
+  flex: 0 0 100%;
+  max-width: 100%;
+
+}.about .about-content .about-text h3
+{
+  font-size: 24px;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: var(--bg-black-900);
+}
+.about .about-content .about-text h3 span
+{
+  color: var(--skin-color);
+
+}
+
+.about .about-content .about-text p
+{
+  font-size: 16px;
+  line-height: 25px;
+  color: var(--text-black-700);
+}
+.about .about-content .personal-info
+{
+  flex: 0 0 60%;
+  max-width: 60%;
+  margin-top: 40%;
+}
+
+.about .about-content .personal-info .info-item
+{
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+.about .about-content .personal-info .info-item p
+{
+  font-weight: 600;
+  padding: 10px 0;
+  font-size: 16px;
+}
+.about .about-content .skills
+{
+  flex: 0 0 40%;
+  max-width: 40%;
+  margin-top: 40%;
 }
