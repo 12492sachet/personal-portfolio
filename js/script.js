@@ -1,133 +1,136 @@
 /*--------------------------- typing animation---------------------------- */
 // Using Typed.js for a typing animation effect
-let typed = new Typed('.typing', {
+let typed = new Typed(".typing", {
   strings: [
-    '',
-    'Web Designer',
-    'Graphic Designer',
-    'Web Developer',
-    'Mechanical Engineer',
+    "",
+    "Web Designer",
+    "Graphic Designer",
+    "Web Developer",
+    "Mechanical Engineer",
+    "Computer Technisian",
   ],
   typeSpeed: 100,
   backSpeed: 60,
   loop: true,
-})
+});
 
 /*==============Aside===================== */
 // Selecting necessary elements from the DOM
-const nav = document.querySelector('.nav'),
-  navList = nav.querySelectorAll('li'),
+const nav = document.querySelector(".nav"),
+  navList = nav.querySelectorAll("li"),
   totalNavList = navList.length,
-  allSection = document.querySelectorAll('.section'),
-  totalSection = allSection.length
+  allSection = document.querySelectorAll(".section"),
+  totalSection = allSection.length;
 
 // Adding click event listeners to each navigation item
 for (let i = 0; i < totalNavList; i++) {
-  const a = navList[i].querySelector('a')
-  a.addEventListener('click', function () {
+  const a = navList[i].querySelector("a");
+  a.addEventListener("click", function () {
     // Removing the 'back-section' class from all sections
-    removeBackSection()
+    removeBackSection();
     for (let j = 0; j < totalNavList; j++) {
       // Adding the 'back-section' class to the previously active section
-      if (navList[j].querySelector('a').classList.contains('active')) {
-        addBackSection(j)
+      if (navList[j].querySelector("a").classList.contains("active")) {
+        addBackSection(j);
       }
       // Removing the 'active' class from all navigation items
-      navList[j].querySelector('a').classList.remove('active')
+
+      navList[j].querySelector("a").classList.remove("active");
     }
     // Adding the 'active' class to the clicked navigation item
-    this.classList.add('active')
+
+    this.classList.add("active");
     // Displaying the corresponding section
-    showSection(this)
+    showSection(this);
     // Closing the aside menu for small screens
     if (window.innerWidth < 1200) {
-      asideSectionTogglerBtn()
+      asideSectionTogglerBtn();
     }
-  })
+  });
 }
 
 // Function to remove the 'back-section' class from all sections
 function removeBackSection() {
   for (let i = 0; i < totalSection; i++) {
-    allSection[i].classList.remove('back-section')
+    allSection[i].classList.remove("back-section");
   }
 }
 
 // Function to add the 'back-section' class to a specific section
 function addBackSection(num) {
-  allSection[num].classList.add('back-section')
+  allSection[num].classList.add("back-section");
 }
 
 // Function to display the clicked section
 function showSection(element) {
   for (let i = 0; i < totalSection; i++) {
-    allSection[i].classList.remove('active')
+    allSection[i].classList.remove("active");
   }
-  const target = element.getAttribute('href').split('#')[1]
-  document.querySelector('#' + target).classList.add('active')
+  const target = element.getAttribute("href").split("#")[1];
+  document.querySelector("#" + target).classList.add("active");
 }
 
 // Function to update the navigation based on the current active section
 function updateNav(element) {
   for (let i = 0; i < totalNavList; i++) {
-    navList[i].querySelector('a').classList.remove('active')
-    const target = element.getAttribute('href').split('#')[1]
+    navList[i].querySelector("a").classList.remove("active");
+    const target = element.getAttribute("href").split("#")[1];
     if (
       target ===
-      navList[i].querySelector('a').getAttribute('href').split('#')[1]
+      navList[i].querySelector("a").getAttribute("href").split("#")[1]
     ) {
-      navList[i].querySelector('a').classList.add('active')
+      navList[i].querySelector("a").classList.add("active");
     }
   }
 }
 
 // Adding a click event listener to the "Hire Me" button
-document.querySelector('.hire-me').addEventListener('click', function () {
-  const sectionIndex = this.getAttribute('data-section-index')
-  showSection(this)
-  updateNav(this)
-  removeBackSection()
-  addBackSection(sectionIndex)
-})
+document.querySelector(".hire-me").addEventListener("click", function () {
+  const sectionIndex = this.getAttribute("data-section-index");
+  showSection(this);
+  updateNav(this);
+  removeBackSection();
+  addBackSection(sectionIndex);
+});
 
 // Adding a click event listener to the navigation toggler button
-const navTogglerBtn = document.querySelector('.nav-toggler'),
-  aside = document.querySelector('.aside')
+const navTogglerBtn = document.querySelector(".nav-toggler"),
+  aside = document.querySelector(".aside");
 
-navTogglerBtn.addEventListener('click', () => {
-  asideSectionTogglerBtn()
-})
+navTogglerBtn.addEventListener("click", () => {
+  asideSectionTogglerBtn();
+});
 
 // Function to toggle the 'open' class for the aside menu and sections
 function asideSectionTogglerBtn() {
-  aside.classList.toggle('open')
-  navTogglerBtn.classList.toggle('open')
+  aside.classList.toggle("open");
+  navTogglerBtn.classList.toggle("open");
   for (let i = 0; i < totalSection; i++) {
-    allSection[i].classList.toggle('open')
+    allSection[i].classList.toggle("open");
   }
 }
 
 /*================Email Submision=================== */
 const sendMail = () => {
   let params = {
-    name: document.getElementById('Name').value,
-    email: document.getElementById('Email').value,
-    email: document.getElementById('Subject').value,
-    message: document.getElementById('Message').value,
-  }
+    name: document.getElementById("Name").value,
+    email: document.getElementById("Email").value,
+    email: document.getElementById("Subject").value,
+    message: document.getElementById("Message").value,
+  };
 
-  const serviceID = 'service_8xzkt3y'
-  const templateID = 'template_vlzywn9'
+  const serviceID = "service_8xzkt3y";
+  const templateID = "template_vlzywn9";
 
   emailjs
     .send(serviceID, templateID, params)
     .then((res) => {
-      document.getElementById('Name').value = ''
-      document.getElementById('Email').value = ''
-      document.getElementById('Subject').value = ''
-      document.getElementById('Message').value = ''
-      console.log(res)
-      alert('Your message has been sent succesfully')
+      document.getElementById("Name").value = "";
+      document.getElementById("Email").value = "";
+      document.getElementById("Subject").value = "";
+      document.getElementById("Message").value = "";
+      console.log(res);
+      alert("Your message has been sent succesfully");
     })
-    .catch((err) => console.log(err))
-}
+    .catch((err) => console.log(err));
+};
