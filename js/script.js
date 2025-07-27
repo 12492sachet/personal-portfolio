@@ -134,3 +134,44 @@ const sendMail = () => {
     })
     .catch((err) => console.log(err));
 };
+
+// Project Statistics Count Up Animation
+function animateStatNumber(element, target, duration = 1200) {
+  let startTimestamp = null;
+  const isPercent = String(target).includes('%');
+  const pureTarget = parseInt(target);
+  function step(timestamp) {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    const value = Math.floor(progress * pureTarget);
+    element.textContent = isPercent ? value + '%' : value + (String(target).includes('+') ? '+' : '');
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    } else {
+      element.textContent = target;
+    }
+  }
+  window.requestAnimationFrame(step);
+}
+
+function initStatsCountUp() {
+  const statsSection = document.querySelector('.stats-section');
+  if (!statsSection) return;
+  let hasAnimated = false;
+  const observer = new window.IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !hasAnimated) {
+      hasAnimated = true;
+      const statNumbers = statsSection.querySelectorAll('.stat-number');
+      statNumbers.forEach((el) => {
+        const target = el.textContent.trim();
+        animateStatNumber(el, target);
+      });
+      observer.disconnect();
+    }
+  }, { threshold: 0.4 });
+  observer.observe(statsSection);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  initStatsCountUp();
+});
